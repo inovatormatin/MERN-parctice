@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyparser = require('body-parser');
 const bcrypt = require('bcrypt');
 const port = 3000;
 const app = express();
