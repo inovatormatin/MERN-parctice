@@ -11,6 +11,6 @@ const {
 router.get('/', hello);
 router.get('/login', login);
 router.get('/logout', logout);
-router.get('/signup', signup);
+router.post('/signup', signup);
 
 module.exports = router;
