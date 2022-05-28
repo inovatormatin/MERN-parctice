@@ -1,4 +1,5 @@
 const user = require('../models/userModel');
+const { body, validationResult } = require('express-validator');
 
 // root
 const hello = (req, res) => {
@@ -13,17 +14,23 @@ const logout = (req, res) => {
     res.send(`logout is called`);
 };
 // signup
-const signup = async (req, res) => {
-    const newUser = new user({
-        name: 'test',
-        password: '34521'
-    });
-    await newUser.save().then(() => {
-        res.json({'success' : 'success'})
-    }).catch((err) => {
-        res.json({'error' : err})
-    });
-};
+const signup = 
+    (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+        }
+        user.create({
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password,
+        }).then(user => res.json(user))
+        .catch(err => {
+            console.log(err);
+            res.json({email : 'This email is already in use'})
+        });
+    }
+;
 
 module.exports = {
     hello,

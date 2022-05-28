@@ -5,6 +5,7 @@ connectdb();
 const user = require('./models/userModel');
 
 require('dotenv').config();
+app.use(express.json());
 
 app.use('/', require('./routes/userRoutes'));
 app.use('/login', require('./routes/userRoutes'));
