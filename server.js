@@ -9,8 +9,8 @@ app.use(express.json());
 
 app.use('/', require('./routes/userRoutes'));
 app.use('/login', require('./routes/userRoutes'));
-app.use('/logout', require('./routes/userRoutes'));
 app.use('/signup', require('./routes/userRoutes'));
+app.use('/getuser', require('./routes/userRoutes'));
 
 // temp route for checking data
 app.get('/showData', (req, res) => {
