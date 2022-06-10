@@ -2,16 +2,16 @@ const express = require("express");
 router = express.Router();
 const { body } = require("express-validator");
 const fetchuser = require("../middleware/fetchuser");
+const { login, signup, getuser } = require("../controllers/userRoutes");
 
-const { hello, login, signup, getuser } = require("../controllers/userRoutes");
-
-router.get("/", hello);
+// login route
 router.post(
     "/login",
     body("email", "Enter a valid email").isEmail(),
     body("password", "Password cannot be blank").exists(),
     login
 );
+// Signup route
 router.post(
     "/signup",
     body("email", "Enter a valid email").isEmail(),
@@ -23,6 +23,7 @@ router.post(
     }),
     signup
 );
+// get user by id
 router.post("/getuser", fetchuser, getuser);
 
 module.exports = router;

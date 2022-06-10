@@ -4,11 +4,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-// root
-const hello = (req, res) => {
-  res.send(`Server is running ...`);
-};
-
 // Route 1: login
 const login = async (req, res) => {
   // if there are errors return bad request and error
@@ -97,20 +92,19 @@ const signup = async (req, res) => {
 
 // Route 3: Get logged user detail
 const getuser = async (req, res) => {
-    try{
-        // here user id is coming from fetchuser function (middleware)
-        userId = req.user.id;
-        // finding user data from database from user id except password
-        const person = await user.findById(userId).select("-password");
-        // sending data as response
-        res.send(person);
-    } catch(error){
-        console.error(error.message);
-        res.status(500).json({error: "Internal server error"})
-    }
+  try {
+    // here user id is coming from fetchuser function (middleware)
+    userId = req.user.id;
+    // finding user data from database from user id except password
+    const person = await user.findById(userId).select("-password");
+    // sending data as response
+    res.send(person);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ error: "Internal server error" })
+  }
 };
 module.exports = {
-  hello,
   login,
   signup,
   getuser

@@ -2,24 +2,17 @@ const express = require('express');
 const app = express();
 const { connectdb } = require('./config/database');
 connectdb();
-const user = require('./models/userModel');
 
 require('dotenv').config();
 app.use(express.json());
 
-app.use('/', require('./routes/userRoutes'));
-app.use('/login', require('./routes/userRoutes'));
-app.use('/signup', require('./routes/userRoutes'));
-app.use('/getuser', require('./routes/userRoutes'));
-
-// temp route for checking data
-app.get('/showData', (req, res) => {
-    const show = async() => {
-        const users = await user.find();
-        res.json(users);
-    };
-    show();
+// root
+app.get('/', (req, res) => {
+    res.status(200).json({message: "Server running fine"})
 });
+// routes
+app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/blogs', require('./routes/blogRoutes'));
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
