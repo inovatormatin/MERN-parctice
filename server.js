@@ -7,7 +7,9 @@ require('dotenv').config();
 connectdb();
 app.use(cors());
 app.options("*", cors());
-app.use(express.json());
+app.use(express.json({
+    type: ['application/json', 'text/plain']
+}));
 
 // root
 app.get('/', (req, res) => {
