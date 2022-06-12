@@ -24,6 +24,6 @@ router.post(
     signup
 );
 // get user by id
-router.post("/getuser", fetchuser, getuser);
+router.get("/getuser", fetchuser, getuser);
 
 module.exports = router;
