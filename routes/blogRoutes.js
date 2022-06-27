@@ -2,8 +2,6 @@ const express = require("express");
 const fetchuser = require("../middleware/fetchuser");
 const { body } = require("express-validator");
 router = express.Router();
-// const { body } = require("express-validator");
-// const fetchuser = require("../middleware/fetchuser");
 const { getallblogs, getblogbyid, addblog, updateblog, deleteblog } = require("../controllers/blogRoutes");
 
 // get all blogs
