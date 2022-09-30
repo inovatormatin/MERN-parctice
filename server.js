@@ -19,6 +19,7 @@ app.get('/', (req, res) => {
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/blogs', require('./routes/blogRoutes'));
 app.use('/api/products', require('./routes/productRoutes'));
+app.use('/api/carts', require('./routes/cartRoutes'));
 
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`);
