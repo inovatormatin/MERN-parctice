@@ -7,10 +7,9 @@ const CartSchema = mongoose.Schema(
             type: Array,
         },
         userId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
+           type:String
         },
     }
 );
-const CartProduct = mongoose.model('CartProduct', CartSchema);
-module.exports = CartProduct;
+const Cartproduct = mongoose.model('Cartproduct', CartSchema);
+module.exports = Cartproduct;
