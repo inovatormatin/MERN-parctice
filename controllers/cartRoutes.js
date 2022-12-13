@@ -52,7 +52,7 @@ const createcartproduct = async (req, res) => {
     // find cart already exist ?
     let optCart = await Cartproduct.findOne({ userId: req.body.userId });
     if(optCart){
-        res.status(500).json({ error: "Cart already exist with this user id" });
+        return res.status(200).json({ msg: "Cart already exist with this user id" });
     }
     const { cart, userId } = req.body;
     const cartproduct = new Cartproduct({
