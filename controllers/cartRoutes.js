@@ -96,7 +96,7 @@ const deleteproduct = async (req, res) => {
         { userId: req.params.uid.toString() },
         { cart: newCart }
       );
-      res.status(200).json({ success: "Product deleted", ubtCart });
+      res.status(200).json({ success: "Product deleted", newCart });
     }
   } catch (error) {
     console.error(error.message);
