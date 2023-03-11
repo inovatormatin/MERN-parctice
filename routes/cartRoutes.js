@@ -5,6 +5,7 @@ const {
   getcartproduct,
   updatecartproduct,
   createcartproduct,
+  deleteproduct
 } = require("../controllers/cartRoutes");
 const { body } = require("express-validator");
 
@@ -22,5 +23,12 @@ router.post(
   body("userId", "User Id is required").exists(),
   createcartproduct
 );
+
+// delete blog
+router.delete(
+  '/deleteproduct/:uid/:productId',
+  fetchuser,
+  deleteproduct
+)
 
 module.exports = router;
