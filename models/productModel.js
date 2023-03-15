@@ -24,7 +24,7 @@ const ProductSchema = mongoose.Schema(
             required: [true, "Price is required"]
         },
         category: {
-            type: Object,
+            type: Array,
             required: [true, "Category is required"]
         },
         tags: {
