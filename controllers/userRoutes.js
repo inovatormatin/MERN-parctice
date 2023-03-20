@@ -2,6 +2,7 @@ const user = require("../models/userModel");
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const User = require("../models/userModel");
 require("dotenv").config();
 
 // Route 1: login
@@ -69,6 +70,14 @@ const signup = async (req, res) => {
       name: req.body.name,
       email: req.body.email,
       password: secPass,
+      phoneNumber: req.body.phoneNumber,
+      secondaryPhoneNumber: req.body.secondaryPhoneNumber,
+      address: req.body.address,
+      house_flat_no: req.body.house_flat_no,
+      city: req.body.city,
+      state: req.body.state,
+      landmark: req.body.landmark,
+      pincode: req.body.pincode,
     });
     //   creating authtokken
     const data = {
@@ -104,8 +113,58 @@ const getuser = async (req, res) => {
     res.status(500).json({ error: "Internal server error" })
   }
 };
+
+// Route 4: Edit user detail
+const updateUser = async (req, res) => {
+  // if there are errors return bad request and error
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  try {
+    // creating new object with updated data
+    const newInfo = {};
+    const { name,
+      phoneNumber,
+      secondaryPhoneNumber,
+      address,
+      house_flat_no,
+      city,
+      state,
+      landmark,
+      pincode } = req.body;
+    if (name) { newInfo.name = name };
+    if (phoneNumber) { newInfo.phoneNumber = phoneNumber };
+    if (secondaryPhoneNumber) { newInfo.secondaryPhoneNumber = secondaryPhoneNumber };
+    if (address) { newInfo.address = address };
+    if (house_flat_no) { newInfo.house_flat_no = house_flat_no };
+    if (city) { newInfo.city = city };
+    if (state) { newInfo.state = state };
+    if (landmark) { newInfo.landmark = landmark };
+    if (pincode) { newInfo.pincode = pincode };
+
+    // find user by id which we want to update
+    let updatetUser = await User.findById(req.params.id);
+    if (!updatetUser) {
+      return res.status(404).json({ error: "User not found" })
+    }
+    // checking for user access
+    if (updatetUser.email !== req.body.email) {
+      return res.status(401).send("Not allowed")
+    }
+    // updating user info
+    updatetUser = await User.findByIdAndUpdate(req.params.id, { $set: newInfo }, { new: true });
+    res.status(200).json(updatetUser);
+
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ error: "Internal server errror" });
+  }
+}
+
 module.exports = {
   login,
   signup,
-  getuser
+  getuser,
+  updateUser
 };

@@ -16,6 +16,33 @@ const UserSchema = mongoose.Schema(
             type: String,
             required: [true, "Password is required"]
         },
+        phoneNumber: {
+            type: Number,
+            required: [true, "Phone number is required"]
+        },
+        secondaryPhoneNumber: {
+            type: Number,
+        },
+        address: {
+            type: String
+        },
+        house_flat_no: {
+            type: String
+        },
+        city: {
+            type: String,
+            required: [true, "Phone number is required"]
+        },
+        state: {
+            type: String
+        },
+        landmark: {
+            type: String
+        },
+        pincode: {
+            type: Number,
+            required: [true, "PINCODE is required"]
+        },
         date: {
             type: Date,
             default: Date.now
