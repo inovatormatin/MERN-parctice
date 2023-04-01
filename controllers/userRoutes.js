@@ -122,8 +122,6 @@ const updateUser = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
   try {
-    // creating new object with updated data
-    const newInfo = {};
     const {
       name,
       phoneNumber,
@@ -135,7 +133,8 @@ const updateUser = async (req, res) => {
       landmark,
       pincode,
     } = req.body;
-    newInfo = {
+    // creating new object with updated data
+    const newInfo = {
       name: name,
       phoneNumber: phoneNumber,
       secondaryPhoneNumber: secondaryPhoneNumber,
