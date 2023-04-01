@@ -110,7 +110,7 @@ const getuser = async (req, res) => {
     res.send(person);
   } catch (error) {
     console.error(error.message);
-    res.status(500).json({ error: "Internal server error" })
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -124,7 +124,8 @@ const updateUser = async (req, res) => {
   try {
     // creating new object with updated data
     const newInfo = {};
-    const { name,
+    const {
+      name,
       phoneNumber,
       secondaryPhoneNumber,
       address,
@@ -132,39 +133,45 @@ const updateUser = async (req, res) => {
       city,
       state,
       landmark,
-      pincode } = req.body;
-    if (name) { newInfo.name = name };
-    if (phoneNumber) { newInfo.phoneNumber = phoneNumber };
-    if (secondaryPhoneNumber) { newInfo.secondaryPhoneNumber = secondaryPhoneNumber };
-    if (address) { newInfo.address = address };
-    if (house_flat_no) { newInfo.house_flat_no = house_flat_no };
-    if (city) { newInfo.city = city };
-    if (state) { newInfo.state = state };
-    if (landmark) { newInfo.landmark = landmark };
-    if (pincode) { newInfo.pincode = pincode };
+      pincode,
+    } = req.body;
+    newInfo = {
+      name: name,
+      phoneNumber: phoneNumber,
+      secondaryPhoneNumber: secondaryPhoneNumber,
+      address: address,
+      house_flat_no: house_flat_no,
+      city: city,
+      state: state,
+      landmark: landmark,
+      pincode: pincode,
+    };
 
     // find user by id which we want to update
     let updatetUser = await User.findById(req.params.id);
     if (!updatetUser) {
-      return res.status(404).json({ error: "User not found" })
+      return res.status(404).json({ error: "User not found" });
     }
     // checking for user access
     if (updatetUser.email !== req.body.email) {
-      return res.status(401).send("Not allowed")
+      return res.status(401).send("Not allowed");
     }
     // updating user info
-    updatetUser = await User.findByIdAndUpdate(req.params.id, { $set: newInfo }, { new: true });
+    updatetUser = await User.findByIdAndUpdate(
+      req.params.id,
+      { $set: newInfo },
+      { new: true }
+    );
     res.status(200).json(updatetUser);
-
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ error: "Internal server errror" });
   }
-}
+};
 
 module.exports = {
   login,
   signup,
   getuser,
-  updateUser
+  updateUser,
 };
