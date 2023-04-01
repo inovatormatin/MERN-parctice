@@ -161,7 +161,10 @@ const updateUser = async (req, res) => {
       { $set: newInfo },
       { new: true }
     );
-    res.status(200).json(newInfo);
+    delete updatetUser.password;
+    delete updatetUser.__v;
+
+    res.status(200).json(updatetUser);
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ error: "Internal server errror" });
