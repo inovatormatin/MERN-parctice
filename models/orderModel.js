@@ -20,7 +20,7 @@ const OrderSchema = mongoose.Schema(
                 required: [true, "User email is required"]
             },
             address: {
-                type: String,
+                type: Object,
                 required: [true, "Address is required"]
             },
         },
