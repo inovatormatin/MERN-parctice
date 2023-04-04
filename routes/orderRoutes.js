@@ -19,6 +19,7 @@ router.post(
   body("paymentMethod", "paymentMethod is required").exists(),
   body("userInfo.userName", "userInfo.userName is required").exists(),
   body("userInfo.userEmail", "userInfo.userEmail is required").exists(),
+  body("userInfo.phone", "userInfo.phone is required").exists(),
   body("userInfo.address", "userInfo.address is required").exists(),
   body("userId", "userId is required").exists(),
   createOrder
