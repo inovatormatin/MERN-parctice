@@ -7,10 +7,7 @@ const getorderproduct = async (req, res) => {
   try {
     const getOrder = await Orderproduct.find({ userId: req.params.id });
     if (getOrder === null) {
-      res.status(500).json({ error: "Order not found." });
-    }
-    if (getOrder.length === 0){
-      res.status(500).json({msg : "Order not found"});
+      res.status(200).json({ msg: "No order found." });
     }
     res.status(200).json(getOrder);
   } catch (error) {
