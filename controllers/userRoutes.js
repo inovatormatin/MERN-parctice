@@ -124,6 +124,7 @@ const updateUser = async (req, res) => {
   try {
     const {
       name,
+      email,
       phoneNumber,
       secondaryPhoneNumber,
       address,
@@ -136,6 +137,7 @@ const updateUser = async (req, res) => {
     // creating new object with updated data
     const newInfo = {
       name: name,
+      email: email,
       phoneNumber: phoneNumber,
       secondaryPhoneNumber: secondaryPhoneNumber,
       address: address,
